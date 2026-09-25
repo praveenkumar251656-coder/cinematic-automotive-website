@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ford Mustang — An interactive digital automotive film disguised as a website. Award-winning 3D motion and engineering deconstruction.">
+  <title>FORD MUSTANG — Precision in Motion</title>
+  
+  <!-- Premium Editorial & Technical Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       AWARD-WINNING DESIGN SYSTEM & CSS TOKENS
+       Cinematic Luxury Automotive • Museum Grade Art Direction
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --bg-base: #040507;
+      --bg-darker: #020203;
+      --bg-surface: #0a0d13;
+      --bg-tinted: rgba(14, 18, 26, 0.4);
+      
+      /* Smoked Glass System */
+      --glass-surface: rgba(10, 13, 18, 0.35);
+      --glass-surface-hover: rgba(18, 22, 30, 0.65);
+      --glass-panel: rgba(8, 11, 16, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-hover: rgba(255, 255, 255, 0.22);
+      --glass-border-subtle: rgba(255, 255, 255, 0.035);
+      --glass-blur: 24px;
+      --glass-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+
+      /* Typography Tones */
+      --text-hero: #ffffff;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --text-faint: #334155;
+      
+      /* Luxury Metallic Accents */
+      --accent-silver: #e2e8f0;
+      --accent-chrome: #cbd5e1;
+      --accent-titanium: #94a3b8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-cyan: #38bdf8;
+
+      /* Typography */
+      --font-display: 'Outfit', -apple-system, sans-serif;
+      --font-serif: 'Cinzel', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+
+      /* Motion */
+      --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-cinematic: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Reset & Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      cursor: none; /* Replaced by custom technical reticle */
+    }
+
+    @media (pointer: coarse) {
+      html {
+        cursor: auto;
+      }
+    }
+
+    ::selection {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Minimalist Technical Scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020203;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CUSTOM AUTOMOTIVE TECHNICAL RETICLE CURSOR
+       ═══════════════════════════════════════════════════════════════ */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--transition-smooth), 
+                  height 0.3s var(--transition-smooth), 
+                  border-color 0.3s ease, 
+                  background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .custom-cursor-dot {
+      width: 3px;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .custom-cursor-text {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .custom-cursor.hovering {
+      width: 60px;
+      height: 60px;
+      border-color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(4px);
+    }
+
+    .custom-cursor.hovering .custom-cursor-dot {
+      opacity: 0;
+    }
+
+    .custom-cursor.hovering .custom-cursor-text {
+      opacity: 1;
+    }
+
+    @media (pointer: coarse) {
+      .custom-cursor {
+        display: none !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYER 1: FIXED DARK STUDIO ENVIRONMENT (z-index: 1)
+       ═══════════════════════════════════════════════════════════════ */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      background: 
+        radial-gradient(circle at 50% 36%, rgba(20, 26, 38, 0.26) 0%, rgba(4, 5, 7, 0.98) 75%),
+        linear-gradient(180deg, #020203 0%, #06080c 45%, #040507 100%);
+    }
+
+    .studio-lighting {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      transition: opacity 1.2s ease;
+    }
+
+    .studio-light-overhead {
+      position: absolute;
+      top: -12%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85vw;
+      height: 42vh;
+      background: radial-gradient(ellipse at center, rgba(220, 235, 255, 0.07) 0%, rgba(100, 120, 150, 0.015) 50%, transparent 80%);
+      filter: blur(70px);
+    }
+
+    .studio-floor-reflection {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 48vh;
+      background: 
+        radial-gradient(ellipse at 50% 90%, rgba(255, 255, 255, 0.035) 0%, rgba(15, 20, 28, 0.02) 40%, transparent 80%),
+        linear-gradient(0deg, rgba(4, 5, 7, 0.96) 0%, transparent 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .studio-floor-grid {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 38vh;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+      background-size: 80px 40px;
+      transform: perspective(600px) rotateX(65deg);
+      transform-origin: bottom center;
+      opacity: 0.3;
+      mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    }
+
+    .mouse-spotlight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 225, 255, 0.035) 0%, rgba(100, 130, 170, 0.008) 45%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      filter: blur(45px);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYER 2: FULLSCREEN SEAMLESS 3D BACKGROUND CANVAS (z-index: 2)
+       Directly scrubbed by scroll position — NOT a video box!
+       ═══════════════════════════════════════════════════════════════ */
+    .motion-background-stage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #mustangCanvas {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      opacity: 0;
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Edge Feathering for Total Background Integration */
+      mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, black 72%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, black 72%, transparent 100%);
+    }
+
+    #mustangCanvas.loaded {
+      opacity: 1;
+    }
+
+    /* Subtle Cinematic Preloader */
+    .canvas-ambient-loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    .canvas-ambient-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-ring {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      animation: spinLoader 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes spinLoader {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYER 3: ATMOSPHERIC DUST & VIGNETTE (z-index: 3 & 4)
+       ═══════════════════════════════════════════════════════════════ */
+    .atmosphere {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    #particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.35;
+    }
+
+    .vignette {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 4;
+      background: radial-gradient(circle at center, transparent 40%, rgba(2, 2, 3, 0.45) 75%, rgba(1, 1, 2, 0.92) 100%);
+      box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.9);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FLOATING 3D HUD VECTOR LEADER LINES & ANNOTATIONS (z-index: 6)
+       ═══════════════════════════════════════════════════════════════ */
+    .hud-callouts-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 6;
+      transition: opacity 0.5s ease;
+    }
+
+    .hud-callout {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+    }
+
+    .hud-callout.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hud-reticle-dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      position: relative;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .hud-reticle-dot::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    .hud-leader-line {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 100%);
+      width: 60px;
+    }
+
+    .hud-callout-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hud-callout-code {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-titanium);
+    }
+
+    .hud-callout-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .hud-callout-desc {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MINIMAL AUTOMOTIVE INSTRUMENT NAVIGATION (z-index: 100)
+       ═══════════════════════════════════════════════════════════════ */
+    .navigation {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: calc(100% - 48px);
+      max-width: 1200px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(8, 10, 15, 0.45);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid var(--glass-border);
+      border-radius: 9999px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      transition: all 0.4s var(--transition-smooth);
+    }
+
+    .navigation.scrolled {
+      background: rgba(6, 8, 12, 0.75);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-logo-icon {
+      width: 20px;
+      height: 12px;
+      fill: currentColor;
+      opacity: 0.9;
+    }
+
+    .nav-brand-text {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-brand-badge {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 1px 5px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      color: var(--accent-titanium);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 4px;
+    }
+
+    .nav-item a {
+      display: block;
+      padding: 5px 12px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-item a.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-timeline-meter {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border-subtle);
+      border-radius: 999px;
+    }
+
+    .nav-timeline-meter .meter-val {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .sound-toggle-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .sound-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .sound-toggle-btn.playing {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VERTICAL CINEMATIC CHAPTER PROGRESS RAIL (z-index: 90)
+       ═══════════════════════════════════════════════════════════════ */
+    .chapter-rail {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      pointer-events: none;
+    }
+
+    .chapter-rail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-end;
+      pointer-events: auto;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      opacity: 0.35;
+    }
+
+    .chapter-rail-item:hover, .chapter-rail-item.active {
+      opacity: 1;
+    }
+
+    .chapter-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all 0.3s var(--transition-smooth);
+    }
+
+    .chapter-rail-item:hover .chapter-label,
+    .chapter-rail-item.active .chapter-label {
+      opacity: 1;
+      transform: translateX(0);
+      color: #ffffff;
+    }
+
+    .chapter-node {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s var(--transition-smooth);
+    }
+
+    .chapter-rail-item.active .chapter-node {
+      height: 20px;
+      border-radius: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    @media (max-width: 900px) {
+      .chapter-rail {
+        display: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYER 5: STORYTELLING CONTENT SECTIONS (z-index: 10)
+       Seamlessly scrolls over the integrated 3D background animation
+       ═══════════════════════════════════════════════════════════════ */
+    .site {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      min-height: 130vh;
+      padding: 100px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 1500px;
+      margin: 0 auto;
+      pointer-events: none;
+    }
+
+    .page > * {
+      pointer-events: auto;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PHASE 01: THE ICON (HERO / REVEAL)
+       ═══════════════════════════════════════════════════════════════ */
+    .hero-page {
+      min-height: 140vh;
+      padding: 0;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .hero-overlay-ui {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      padding: 90px 48px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+      max-width: 1500px;
+      margin: 0 auto;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .hero-overlay-ui > * {
+      pointer-events: auto;
+    }
+
+    .hero-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .hero-spec-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-spec-tag::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 6px var(--accent-emerald);
+    }
+
+    .hero-coordinates {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--text-faint);
+      text-align: right;
+    }
+
+    .hero-bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    .hero-headline-block {
+      max-width: 480px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent-titanium);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5.5vw, 68px);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.45) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      max-width: 380px;
+      line-height: 1.5;
+    }
+
+    .hero-telemetry-cluster {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-stat-pill {
+      background: rgba(10, 13, 18, 0.35);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 8px 16px;
+      backdrop-filter: blur(12px);
+      text-align: left;
+    }
+
+    .hero-stat-pill .stat-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .hero-stat-pill .stat-value {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .hero-scroll-indicator:hover {
+      color: #ffffff;
+    }
+
+    .scroll-mouse {
+      width: 16px;
+      height: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 4px;
+      background: #ffffff;
+      border-radius: 2px;
+      animation: scrollWheel 2s infinite ease-in-out;
+    }
+
+    @keyframes scrollWheel {
+      0% { top: 4px; opacity: 1; height: 4px; }
+      50% { top: 12px; opacity: 0.2; height: 2px; }
+      100% { top: 4px; opacity: 1; height: 4px; }
+    }
+
+    .scroll-text {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PHASE 02: THE MACHINE (AERODYNAMICS & HERITAGE)
+       Peripheral Flanked Layout — Center 80% Clear for 3D Car
+       ═══════════════════════════════════════════════════════════════ */
+    .about-page {
+      min-height: 140vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .section-header-minimal {
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent-titanium);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-eyebrow::before {
+      content: '//';
+      color: var(--text-muted);
+    }
+
+    .section-title-editorial {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .section-desc-minimal {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    .about-flanks-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      margin-top: auto;
+      gap: 40px;
+    }
+
+    .heritage-left-flank {
+      max-width: 360px;
+      border-left: 1px solid rgba(255, 255, 255, 0.25);
+      padding-left: 16px;
+    }
+
+    .heritage-quote {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-style: italic;
+      color: #e2e8f0;
+      line-height: 1.45;
+    }
+
+    .heritage-author {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .heritage-right-flank {
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .minimal-spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 12px;
+      background: rgba(10, 13, 18, 0.35);
+      border: 1px solid var(--glass-border-subtle);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .spec-row-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .spec-row-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PHASE 03 & 04: THE EXPLODED VIEW & ENGINEERING INSPECTOR
+       Floating HUD Readouts + Sleek Micro-Pill Selector
+       ═══════════════════════════════════════════════════════════════ */
+    .components-page {
+      min-height: 150vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 90px;
+      padding-bottom: 80px;
+    }
+
+    .engineering-hud-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      width: 100%;
+    }
+
+    .component-active-info {
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .comp-cat-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-titanium);
+    }
+
+    .comp-headline {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .comp-paragraph {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-weight: 300;
+      max-width: 380px;
+    }
+
+    .component-telemetry-cluster {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 420px;
+    }
+
+    .telemetry-mini-card {
+      background: rgba(10, 14, 20, 0.35);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      backdrop-filter: blur(12px);
+    }
+
+    .telemetry-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .telemetry-value {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .telemetry-note {
+      font-size: 9px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* Minimalist Pill Strip Selector */
+    .components-pill-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto;
+      padding: 10px 16px;
+      background: rgba(8, 10, 15, 0.35);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border-subtle);
+      border-radius: 999px;
+    }
+
+    .component-nav-pill {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      padding: 5px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+
+    .component-nav-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .component-nav-pill.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+
+    .component-nav-pill .pill-num {
+      color: var(--accent-titanium);
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PHASE 05 & 06: THE RECONSTRUCTION & COLLABORATION
+       High-End Architectural Commission Section
+       ═══════════════════════════════════════════════════════════════ */
+    .contact-page {
+      min-height: 130vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .contact-compact-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-header-minimal {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .contact-title-minimal {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .contact-subtitle-minimal {
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .contact-glass-card {
+      background: rgba(8, 11, 16, 0.45);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 28px;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .contact-profile-flank {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .profile-dev-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-titanium);
+    }
+
+    .profile-dev-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .profile-dev-role {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+
+    .contact-links-list-minimal {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .contact-link-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(14, 18, 26, 0.35);
+      border: 1px solid var(--glass-border-subtle);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.25s ease;
+    }
+
+    .contact-link-pill:hover {
+      background: rgba(22, 28, 38, 0.6);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateX(3px);
+    }
+
+    .link-pill-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .link-pill-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .contact-form-flank {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-row-minimal {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-label-minimal {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-input-minimal, .form-textarea-minimal, .form-select-minimal {
+      width: 100%;
+      background: rgba(12, 16, 22, 0.55);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: #ffffff;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .form-input-minimal:focus, .form-textarea-minimal:focus, .form-select-minimal:focus {
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(16, 22, 30, 0.8);
+    }
+
+    .form-select-minimal option {
+      background: #090c12;
+      color: #ffffff;
+    }
+
+    .form-textarea-minimal {
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    /* Minimalist Magnetic Line Expanding Button */
+    .btn-magnetic-minimal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 20px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--transition-smooth);
+    }
+
+    .btn-magnetic-minimal:hover {
+      background: #ffffff;
+      color: #050505;
+      border-color: #ffffff;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-arrow-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      transition: transform 0.3s var(--transition-smooth);
+    }
+
+    .btn-magnetic-minimal:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Commission Status Notification Banner */
+    .commission-status-box {
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 11px;
+      line-height: 1.5;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.3s var(--transition-smooth);
+      animation: fadeInStatus 0.35s ease forwards;
+    }
+
+    @keyframes fadeInStatus {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spinLoader {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .commission-status-box.success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #e6fffa;
+    }
+
+    .commission-status-box.error {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #ffe4e6;
+    }
+
+    .commission-status-box.loading {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #f0f9ff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-top: 2px solid #ffffff;
+      border-radius: 50%;
+      animation: spinLoader 0.8s linear infinite;
+    }
+
+    .site-footer-minimal {
+      border-top: 1px solid var(--glass-border-subtle);
+      padding: 24px 0 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      width: 100%;
+    }
+
+    .site-footer-minimal a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .site-footer-minimal a:hover {
+      color: #ffffff;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE ADAPTATIONS
+       ═══════════════════════════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .about-flanks-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+      .engineering-hud-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .contact-glass-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navigation {
+        top: 14px;
+        width: calc(100% - 28px);
+        padding: 0 16px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+
+      .nav-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 72px;
+        left: 14px;
+        right: 14px;
+        background: rgba(8, 10, 15, 0.95);
+        backdrop-filter: blur(24px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 20px;
+        gap: 8px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+      }
+
+      .nav-mobile-toggle {
+        display: block;
+      }
+
+      .page {
+        padding: 80px 20px 40px;
+      }
+
+      .hero-overlay-ui {
+        padding: 75px 20px 24px;
+      }
+
+      .hero-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .hero-telemetry-cluster {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .components-pill-strip {
+        border-radius: 12px;
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+
+      .site-footer-minimal {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CUSTOM AUTOMOTIVE TECHNICAL RETICLE CURSOR
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="custom-cursor" id="customCursor">
+    <div class="custom-cursor-dot"></div>
+    <span class="custom-cursor-text" id="cursorText">EXPLORE</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LAYER 1: FIXED DARK STUDIO ENVIRONMENT (z-index: 1)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="background">
+    <div class="studio-lighting" id="studioLighting">
+      <div class="studio-light-overhead"></div>
+      <div class="studio-floor-reflection"></div>
+      <div class="studio-floor-grid"></div>
+      <div class="mouse-spotlight" id="mouseSpotlight"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LAYER 2: FULLSCREEN SEAMLESS 3D BACKGROUND CANVAS (z-index: 2)
+       Directly scrubbed by scroll position — NOT a video box!
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="motion-background-stage">
+    <canvas id="mustangCanvas"></canvas>
+    <div class="canvas-ambient-loader" id="canvasLoader">
+      <div class="loader-ring"></div>
+      <span class="loader-text" id="loaderText">CALIBRATING 3D ENVIRONMENT...</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LAYER 3 & 4: ATMOSPHERIC PARTICLES & VIGNETTE (z-index: 3 & 4)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="atmosphere">
+    <canvas id="particles-canvas"></canvas>
+  </div>
+  <div class="vignette"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LAYER 6: 3D HUD VECTOR LEADER LINE CALLOUTS (z-index: 6)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="hud-callouts-layer" id="hudCalloutsLayer">
+    <!-- Callout 1: Engine -->
+    <div class="hud-callout" id="calloutEngine" style="top: 38%; left: 18%;">
+      <div class="hud-callout-content" style="text-align: right;">
+        <span class="hud-callout-code">SYS // 01</span>
+        <h4 class="hud-callout-title">5.0L Coyote V8</h4>
+        <span class="hud-callout-desc">Dual Throttle Body &bull; 500 HP</span>
+      </div>
+      <div class="hud-leader-line"></div>
+      <div class="hud-reticle-dot"></div>
+    </div>
+
+    <!-- Callout 2: Aero Splitter -->
+    <div class="hud-callout" id="calloutAero" style="top: 62%; right: 20%;">
+      <div class="hud-reticle-dot"></div>
+      <div class="hud-leader-line"></div>
+      <div class="hud-callout-content">
+        <span class="hud-callout-code">SYS // 02</span>
+        <h4 class="hud-callout-title">Aero Matrix</h4>
+        <span class="hud-callout-desc">0.32 CD &bull; Downforce Pack</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VERTICAL CINEMATIC CHAPTER PROGRESS RAIL
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="chapter-rail" id="chapterRail">
+    <a href="#hero" class="chapter-rail-item active" data-phase="1">
+      <span class="chapter-label">01 // THE ICON</span>
+      <div class="chapter-node"></div>
+    </a>
+    <a href="#about" class="chapter-rail-item" data-phase="2">
+      <span class="chapter-label">02 // AERODYNAMICS</span>
+      <div class="chapter-node"></div>
+    </a>
+    <a href="#components" class="chapter-rail-item" data-phase="3">
+      <span class="chapter-label">03 // DECONSTRUCTION</span>
+      <div class="chapter-node"></div>
+    </a>
+    <a href="#contact" class="chapter-rail-item" data-phase="4">
+      <span class="chapter-label">04 // COMMISSION</span>
+      <div class="chapter-node"></div>
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       NAVIGATION BAR (.navigation)
+       Minimal Frosted Glass Pill • Realtime Scroll Timeline
+       ═══════════════════════════════════════════════════════════════ -->
+  <nav class="navigation" id="mainNav">
+    <a href="#hero" class="nav-brand" id="navBrand">
+      <svg class="nav-logo-icon" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M23.5 6.2C22.1 5.8 20.8 5.2 19.5 4.8C18.2 4.4 16.8 4 15.5 3.7C14.2 3.4 12.9 3.2 11.6 3.1C10.3 3 9 3.1 7.7 3.3C6.4 3.5 5.1 3.9 3.9 4.5C2.7 5.1 1.6 5.9 0.7 6.9C0.4 7.2 0.2 7.6 0.1 8C0 8.4 0 8.8 0.1 9.2C0.3 9.6 0.6 9.9 1 10.1C1.4 10.3 1.8 10.4 2.2 10.3C3.6 10 5 9.4 6.3 8.7C7.6 8 8.9 7.2 10.3 6.6C11.7 6 13.1 5.6 14.5 5.4C15.9 5.2 17.3 5.2 18.7 5.4C20.1 5.6 21.4 6 22.7 6.6C23.1 6.8 23.6 6.7 23.9 6.4C24.1 6.1 24.1 5.7 23.8 5.4L23.5 6.2Z" fill="currentColor"/>
+      </svg>
+      <span class="nav-brand-text">
+        MUSTANG
+        <span class="nav-brand-badge">S650</span>
+      </span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-item"><a href="#hero" class="active" id="navLinkHero">01 THE ICON</a></li>
+      <li class="nav-item"><a href="#about" id="navLinkAbout">02 AERODYNAMICS</a></li>
+      <li class="nav-item"><a href="#components" id="navLinkComponents">03 ENGINEERING</a></li>
+      <li class="nav-item"><a href="#contact" id="navLinkContact">04 COMMISSION</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <!-- Real-time Frame Timeline Progress Indicator -->
+      <div class="nav-timeline-meter">
+        <span>TIMELINE:</span>
+        <span class="meter-val" id="navFrameDisplay">001</span>
+        <span>/ 300</span>
+      </div>
+
+      <!-- Ambient Studio Drone Synth Toggle (Web Audio API) -->
+      <button class="sound-toggle-btn" id="soundToggle" title="Toggle Studio Acoustic Atmosphere" aria-label="Toggle Sound">
+        <svg id="soundIconOff" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+          <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
+          <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
+          <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+        <svg id="soundIconOn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+
+      <!-- Mobile Nav Toggle -->
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LAYER 5: MAIN STORYTELLING JOURNEY OVER 3D BACKGROUND
+       ═══════════════════════════════════════════════════════════════ -->
+  <main class="site">
+
+    <!-- ═════════════════════════════════════════════════════════════
+         PHASE 01: THE ICON (0% - 25% Scroll Range)
+         Flanked Peripherally — 3D Car Center Uncovered
+         ═════════════════════════════════════════════════════════════ -->
+    <section class="page hero-page" id="hero">
+      
+      <div class="hero-overlay-ui" id="heroOverlay">
+        
+        <!-- Top Flank: Status & Telemetry -->
+        <div class="hero-top-bar">
+          <div class="hero-spec-tag">
+            <span>CHASSIS S650 // 3D STAGE ACTIVE</span>
+          </div>
+          <div class="hero-coordinates">
+            LAT 42.3314° N &bull; LON 83.0458° W<br>
+            DETROIT PROVING GROUNDS
+          </div>
+        </div>
+
+        <!-- Bottom Flank: Cinematic Editorial Typography -->
+        <div class="hero-bottom-bar">
+          
+          <div class="hero-headline-block">
+            <div class="hero-eyebrow">
+              <span>01 // THE ICON REENGINEERED</span>
+            </div>
+            <h1 class="hero-title">PRECISION IN MOTION.</h1>
+            <p class="hero-subtitle">An interactive digital automotive film. Scroll to navigate through the 3D cinematic timeline and inspect the machine.</p>
+          </div>
+
+          <!-- Realtime Specs Cluster -->
+          <div class="hero-telemetry-cluster">
+            <div class="hero-stat-pill">
+              <div class="stat-label">OUTPUT</div>
+              <div class="stat-value">500 <span style="font-size:10px; font-weight:300; color:var(--text-muted)">HP</span></div>
+            </div>
+            <div class="hero-stat-pill">
+              <div class="stat-label">0-60 MPH</div>
+              <div class="stat-value">3.7 <span style="font-size:10px; font-weight:300; color:var(--text-muted)">SEC</span></div>
+            </div>
+            <div class="hero-stat-pill">
+              <div class="stat-label">TORQUE</div>
+              <div class="stat-value">418 <span style="font-size:10px; font-weight:300; color:var(--text-muted)">LB-FT</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Scroll Cue Indicator -->
+        <a href="#about" class="hero-scroll-indicator" id="heroScrollCue" aria-label="Scroll to Explore">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+          <span class="scroll-text">SCROLL TO CONTROL 3D TIMELINE</span>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         PHASE 02: THE MACHINE / AERODYNAMICS (25% - 50% Scroll Range)
+         ═════════════════════════════════════════════════════════════ -->
+    <section class="page about-page" id="about">
+      
+      <!-- Top Flank: Section Header -->
+      <div class="section-header-minimal">
+        <div class="section-eyebrow">02 // AERODYNAMIC ARCHITECTURE</div>
+        <h2 class="section-title-editorial">AN AMERICAN ICON.</h2>
+        <p class="section-desc-minimal">Six decades of unbroken muscle car pedigree, distilled into a sculpted modern silhouette optimized in the wind tunnel for high-speed downforce.</p>
+      </div>
+
+      <!-- Bottom Flanks: Negative Space in Center for 3D Car -->
+      <div class="about-flanks-container">
+        
+        <div class="heritage-left-flank">
+          <p class="heritage-quote">"A car that does not just transport you, but stirs the pulse of everyone who hears it coming."</p>
+          <div class="heritage-author">— THE MUSTANG PHILOSOPHY</div>
+        </div>
+
+        <div class="heritage-right-flank">
+          <div class="minimal-spec-row">
+            <span class="spec-row-name">01 // DRAG COEFFICIENT</span>
+            <span class="spec-row-val">0.32 CD TRACK OPTIMIZED</span>
+          </div>
+          <div class="minimal-spec-row">
+            <span class="spec-row-name">02 // WEIGHT DISTRIBUTION</span>
+            <span class="spec-row-val">52% FRONT / 48% REAR</span>
+          </div>
+          <div class="minimal-spec-row">
+            <span class="spec-row-name">03 // DOWNSHIFT MATCHING</span>
+            <span class="spec-row-val">0.05 SEC REV-CALIBRATED</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         PHASE 03 & 04: THE EXPLOSION & ENGINEERING (50% - 75% Scroll)
+         ═════════════════════════════════════════════════════════════ -->
+    <section class="page components-page" id="components">
+      
+      <!-- Top Flank: Active Telemetry HUD Readout -->
+      <div class="engineering-hud-container" id="componentVisualLayer">
+        
+        <div class="component-active-info">
+          <span class="comp-cat-tag" id="compCategory">POWERTRAIN // COMBUSTION</span>
+          <h3 class="comp-headline" id="compName">5.0L GEN-4 COYOTE V8</h3>
+          <p class="comp-paragraph" id="compDesc">The heart of the Mustang: featuring an industry-first dual air-intake box and dual-throttle body design that maximizes airflow velocity and high-RPM power delivery with 500 naturally aspirated horsepower.</p>
+        </div>
+
+        <div class="component-telemetry-cluster" id="compTelemetry">
+          <div class="telemetry-mini-card">
+            <div class="telemetry-label" id="metric1Label">DISPLACEMENT</div>
+            <div class="telemetry-value" id="metric1Val">5,038 CC</div>
+            <div class="telemetry-note" id="metric1Note">Dual Throttle Body</div>
+          </div>
+
+          <div class="telemetry-mini-card">
+            <div class="telemetry-label" id="metric2Label">PEAK OUTPUT</div>
+            <div class="telemetry-value" id="metric2Val">500 HP @ 7250</div>
+            <div class="telemetry-note" id="metric2Note">Naturally Aspirated</div>
+          </div>
+
+          <div class="telemetry-mini-card">
+            <div class="telemetry-label" id="metric3Label">TORQUE CURVE</div>
+            <div class="telemetry-value" id="metric3Val">418 LB-FT</div>
+            <div class="telemetry-note" id="metric3Note">@ 4,900 RPM</div>
+          </div>
+
+          <div class="telemetry-mini-card">
+            <div class="telemetry-label" id="metric4Label">VALVETRAIN</div>
+            <div class="telemetry-value" id="metric4Val">32V DOHC</div>
+            <div class="telemetry-note" id="metric4Note">Twin Independent VCT</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Edge: Minimal Pill Strip for Component Selection -->
+      <div class="components-pill-strip" id="componentsPillStrip">
+        <button class="component-nav-pill active" data-index="0">
+          <span class="pill-num">01</span>
+          <span>5.0L V8</span>
+        </button>
+        <button class="component-nav-pill" data-index="1">
+          <span class="pill-num">02</span>
+          <span>6-SPEED</span>
+        </button>
+        <button class="component-nav-pill" data-index="2">
+          <span class="pill-num">03</span>
+          <span>MAGNERIDE</span>
+        </button>
+        <button class="component-nav-pill" data-index="3">
+          <span class="pill-num">04</span>
+          <span>BREMBO 6P</span>
+        </button>
+        <button class="component-nav-pill" data-index="4">
+          <span class="pill-num">05</span>
+          <span>EXHAUST</span>
+        </button>
+        <button class="component-nav-pill" data-index="5">
+          <span class="pill-num">06</span>
+          <span>AERO PACK</span>
+        </button>
+        <button class="component-nav-pill" data-index="6">
+          <span class="pill-num">07</span>
+          <span>TORSEN DIFF</span>
+        </button>
+        <button class="component-nav-pill" data-index="7">
+          <span class="pill-num">08</span>
+          <span>3D COCKPIT</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         PHASE 05 & 06: THE RECONSTRUCTION & COMMISSION (75% - 100%)
+         ═════════════════════════════════════════════════════════════ -->
+    <section class="page contact-page" id="contact">
+      
+      <div class="contact-compact-container">
+        
+        <div class="contact-header-minimal">
+          <div class="section-eyebrow" style="justify-content:center;">04 // BESPOKE COLLABORATION</div>
+          <h2 class="contact-title-minimal">LIKE THIS EXPERIENCE?</h2>
+          <p class="contact-subtitle-minimal">Commission an award-winning 3D motion website, interactive WebGL experience, or product showcase for your brand.</p>
+        </div>
+
+        <div class="contact-glass-card">
+          
+          <!-- Left: Developer Information & Verified Links -->
+          <div class="contact-profile-flank">
+            <div>
+              <span class="profile-dev-tag">CREATIVE DEVELOPER & 3D DESIGNER</span>
+              <h3 class="profile-dev-name">S.V.PRAVEEN KUMAR</h3>
+              <p class="profile-dev-role">Specializing in high-end automotive, WebGL, 3D motion sequences, and luxury interactive design.</p>
+            </div>
+
+            <ul class="contact-links-list-minimal">
+              <li>
+                <a href="mailto:praveenkumar251656@gmail.com" class="contact-link-pill" id="linkEmail">
+                  <div>
+                    <span class="link-pill-label">EMAIL DIRECT</span><br>
+                    <span class="link-pill-val">praveenkumar251656@gmail.com</span>
+                  </div>
+                  <span style="font-size:12px; color:var(--text-muted);">↗</span>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.linkedin.com/in/praveen-kumar-s-v-188364432/" target="_blank" rel="noopener noreferrer" class="contact-link-pill" id="linkLinkedin">
+                  <div>
+                    <span class="link-pill-label">LINKEDIN PROFILE</span><br>
+                    <span class="link-pill-val">linkedin.com/in/praveen-kumar-s-v-188364432</span>
+                  </div>
+                  <span style="font-size:12px; color:var(--text-muted);">↗</span>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://github.com/praveenkumar251656-coder" target="_blank" rel="noopener noreferrer" class="contact-link-pill" id="linkGithub">
+                  <div>
+                    <span class="link-pill-label">GITHUB REPOSITORIES</span><br>
+                    <span class="link-pill-val">praveenkumar251656-coder</span>
+                  </div>
+                  <span style="font-size:12px; color:var(--text-muted);">↗</span>
+                </a>
+              </li>
+            </ul>
+
+            <div style="font-family:var(--font-mono); font-size:9px; color:var(--accent-emerald);">
+              ● OPEN FOR BESPOKE COMMISSIONS & INTERACTIVE PROJECTS
+            </div>
+          </div>
+
+          <!-- Right: Sleek Project Scope Launcher -->
+          <div class="contact-form-flank">
+            <form id="projectInquiryForm" onsubmit="handleInquirySubmit(event)" style="display:flex; flex-direction:column; gap:10px;">
+              
+              <!-- Anti-Spam Honeypot Field (Hidden from humans, traps automated bots) -->
+              <input type="text" name="website_url_hp" id="website_url_hp" style="display:none !important; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+              <div class="form-row-minimal">
+                <label class="form-label-minimal" for="projectType">EXPERIENCE SCOPE</label>
+                <select class="form-select-minimal" id="projectType" required aria-required="true">
+                  <option value="" disabled selected>Select website or experience scope...</option>
+                  <option value="3D Automotive Showcase">3D Automotive / Product Showcase</option>
+                  <option value="Cinematic WebGL Landing Page">Cinematic WebGL Landing Page</option>
+                  <option value="Luxury Brand Experience">Luxury Brand Flagship Experience</option>
+                  <option value="Interactive Web Narrative">Interactive Web Narrative</option>
+                  <option value="Full-Stack Custom Application">Full-Stack Custom Application</option>
+                </select>
+              </div>
+
+              <div class="form-row-minimal">
+                <label class="form-label-minimal" for="clientEmail">YOUR EMAIL / CONTACT</label>
+                <input type="email" class="form-input-minimal" id="clientEmail" placeholder="name@company.com" required aria-required="true" autocomplete="email">
+              </div>
+
+              <div class="form-row-minimal">
+                <label class="form-label-minimal" for="projectVision">PROJECT VISION & REQUIREMENTS</label>
+                <textarea class="form-textarea-minimal" id="projectVision" placeholder="Tell me about your brand, vehicle/product, desired animation frames, and visual ambition..." required aria-required="true" minlength="5"></textarea>
+              </div>
+
+              <!-- Realtime Feedback / Status Notification -->
+              <div id="commissionStatusMessage" class="commission-status-box" style="display:none;" aria-live="polite" role="alert"></div>
+
+              <button type="submit" class="btn-magnetic-minimal" id="startProjectBtn">
+                <span id="btnText">COMMISSION A BESPOKE EXPERIENCE</span>
+                <span class="btn-arrow-line" id="btnArrow">→</span>
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+
+        <footer class="site-footer-minimal">
+          <div>FORD MUSTANG DIGITAL SHOWCASE // ARCHITECTURE v3.5</div>
+          <div>DEVELOPED BY S.V.PRAVEEN KUMAR &bull; <a href="#hero">RETURN TO TOP ↑</a></div>
+        </footer>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SCROLL-SCRUBBED 3D BACKGROUND CANVAS ENGINE (requestAnimationFrame)
+       ═══════════════════════════════════════════════════════════════ -->
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       1. FRAME ENGINE: SMOOTH VELOCITY LERP & CANVAS INTEGRATION
+       ═══════════════════════════════════════════════════════════════ */
+    const TOTAL_FRAMES = 300;
+    const FRAME_BASE_PATH = 'frames/ezgif-frame-';
+    const FRAME_EXTENSION = '.jpg';
+    const FRAME_VERSION = 'v=ford_mustang_master_sequence';
+
+    const canvas = document.getElementById('mustangCanvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    const canvasLoader = document.getElementById('canvasLoader');
+    const loaderText = document.getElementById('loaderText');
+    const navFrameDisplay = document.getElementById('navFrameDisplay');
+    const calloutEngine = document.getElementById('calloutEngine');
+    const calloutAero = document.getElementById('calloutAero');
+    const chapterRailItems = document.querySelectorAll('.chapter-rail-item');
+
+    const framesCache = new Array(TOTAL_FRAMES + 1);
+    let loadedCount = 0;
+    let currentFrame = 1;
+    let targetFrame = 1;
+    let isInitialReady = false;
+
+    function getFramePath(index) {
+      const padded = String(index).padStart(3, '0');
+      return `${FRAME_BASE_PATH}${padded}${FRAME_EXTENSION}?${FRAME_VERSION}`;
+    }
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      drawFrame(Math.round(currentFrame));
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // High performance contain-fitting canvas draw with seamless edge feathering
+    function drawFrame(frameNum) {
+      const img = framesCache[frameNum] || findNearestLoadedFrame(frameNum);
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const cw = canvas.width;
+      const ch = canvas.height;
+      ctx.clearRect(0, 0, cw, ch);
+
+      const imgAspect = img.naturalWidth / img.naturalHeight;
+      const canvasAspect = cw / ch;
+
+      let drawW, drawH, drawX, drawY;
+
+      if (canvasAspect > imgAspect) {
+        drawH = ch;
+        drawW = ch * imgAspect;
+        drawX = (cw - drawW) / 2;
+        drawY = 0;
+      } else {
+        drawW = cw;
+        drawH = cw / imgAspect;
+        drawX = 0;
+        drawY = (ch - drawH) / 2;
+      }
+
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+      if (navFrameDisplay) {
+        navFrameDisplay.textContent = String(frameNum).padStart(3, '0');
+      }
+
+      // Dynamic 3D HUD Callout Triggers based on frame chapters
+      if (calloutEngine && calloutAero) {
+        if (frameNum >= 45 && frameNum <= 110) {
+          calloutEngine.classList.add('active');
+        } else {
+          calloutEngine.classList.remove('active');
+        }
+
+        if (frameNum >= 120 && frameNum <= 190) {
+          calloutAero.classList.add('active');
+        } else {
+          calloutAero.classList.remove('active');
+        }
+      }
+    }
+
+    function findNearestLoadedFrame(frameNum) {
+      if (framesCache[frameNum] && framesCache[frameNum].complete) {
+        return framesCache[frameNum];
+      }
+      for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+        if (frameNum - offset >= 1 && framesCache[frameNum - offset] && framesCache[frameNum - offset].complete) {
+          return framesCache[frameNum - offset];
+        }
+        if (frameNum + offset <= TOTAL_FRAMES && framesCache[frameNum + offset] && framesCache[frameNum + offset].complete) {
+          return framesCache[frameNum + offset];
+        }
+      }
+      return null;
+    }
+
+    // Preload frames with immediate priority queue on first 25 frames
+    function preloadAllFrames() {
+      const priorityCount = 25;
+      let priorityLoaded = 0;
+
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        img.src = getFramePath(i);
+
+        img.onload = () => {
+          framesCache[i] = img;
+          loadedCount++;
+
+          if (i <= priorityCount) {
+            priorityLoaded++;
+            if (loaderText && !isInitialReady) {
+              const pct = Math.round((priorityLoaded / priorityCount) * 100);
+              loaderText.textContent = `SYNCING 3D TIMELINE ${pct}%`;
+            }
+
+            if (priorityLoaded >= 10 && !isInitialReady) {
+              isInitialReady = true;
+              resizeCanvas();
+              drawFrame(1);
+              canvas.classList.add('loaded');
+              canvasLoader.classList.add('hidden');
+            }
+          }
+        };
+      }
+    }
+
+    // Calculate frame progression directly from page scroll
+    function updateScrollTarget() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      
+      if (maxScroll <= 0) return;
+      
+      const scrollFraction = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+      targetFrame = Math.min(Math.max(Math.floor(scrollFraction * (TOTAL_FRAMES - 1)) + 1, 1), TOTAL_FRAMES);
+
+      // Parallax fade on Hero Overlay UI as you scroll down
+      const heroOverlay = document.getElementById('heroOverlay');
+      if (heroOverlay) {
+        const heroFraction = Math.min(scrollTop / (window.innerHeight * 0.7), 1);
+        heroOverlay.style.opacity = String(1 - heroFraction * 0.95);
+        heroOverlay.style.transform = `translateY(${-heroFraction * 30}px)`;
+      }
+
+      // Update vertical chapter rail
+      let activePhase = 1;
+      if (scrollFraction > 0.75) activePhase = 4;
+      else if (scrollFraction > 0.45) activePhase = 3;
+      else if (scrollFraction > 0.18) activePhase = 2;
+
+      chapterRailItems.forEach((item) => {
+        if (parseInt(item.getAttribute('data-phase'), 10) === activePhase) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+
+    // Smooth Lerp Animation Loop with velocity damping
+    function renderLoop() {
+      const diff = targetFrame - currentFrame;
+      if (Math.abs(diff) > 0.01) {
+        currentFrame += diff * 0.12; // Smooth cubic-like interpolation
+        drawFrame(Math.round(currentFrame));
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    preloadAllFrames();
+    requestAnimationFrame(renderLoop);
+
+    /* ═══════════════════════════════════════════════════════════════
+       2. MUSTANG COMPONENTS TELEMETRY DATA & INTERACTIVITY
+       ═══════════════════════════════════════════════════════════════ */
+    const MUSTANG_COMPONENTS = [
+      {
+        id: "CYT-V8-G4",
+        category: "POWERTRAIN // COMBUSTION",
+        name: "5.0L GEN-4 COYOTE V8",
+        desc: "The heart of the Mustang: featuring an industry-first dual air-intake box and dual-throttle body design that maximizes airflow velocity and high-RPM power delivery with 500 naturally aspirated horsepower.",
+        metrics: [
+          { label: "DISPLACEMENT", val: "5,038 CC", note: "Dual Throttle Body" },
+          { label: "PEAK OUTPUT", val: "500 HP @ 7250", note: "Naturally Aspirated" },
+          { label: "TORQUE CURVE", val: "418 LB-FT", note: "@ 4,900 RPM" },
+          { label: "VALVETRAIN", val: "32V DOHC", note: "Twin Independent VCT" }
+        ]
+      },
+      {
+        id: "TRM-3160-6S",
+        category: "DRIVETRAIN // TRANSMISSION",
+        name: "TREMEC® 6-SPEED MANUAL",
+        desc: "Track-focused Tremec 3160 six-speed manual gearbox with standard rev-matching technology and an exclusive 3D-printed titanium shift ball, paired with a dedicated transmission oil cooler.",
+        metrics: [
+          { label: "GEARBOX TYPE", val: "6-SPD MANUAL", note: "Tremec TR-3160" },
+          { label: "REV MATCHING", val: "ACTIVE DOWNSHIFT", note: "Millisecond Precision" },
+          { label: "COOLING SYSTEM", val: "DEDICATED COOLER", note: "Track Endurance" },
+          { label: "FLYWHEEL", val: "DUAL MASS", note: "Lightweight Inertia" }
+        ]
+      },
+      {
+        id: "MGR-DAMP-1KHZ",
+        category: "CHASSIS // ACTIVE SUSPENSION",
+        name: "MAGNERIDE® ACTIVE DAMPING",
+        desc: "Magnetorheological dampers filled with synthetic hydrocarbon fluid containing microscopic magnetic particles, continuously varying damping stiffness 1,000 times per second for instant compliance.",
+        metrics: [
+          { label: "SAMPLE RATE", val: "1,000 HZ", note: "Real-time road scanning" },
+          { label: "FLUID DYNAMICS", val: "MAGNETORHEOLOGIC", note: "Instantaneous Viscosity" },
+          { label: "SWAY BARS", val: "HOLLOW 33.3MM", note: "Front / Rear Integrated" },
+          { label: "LATERAL CONTROL", val: "TRACK-CALIBRATED", note: "Zero Body Roll Drift" }
+        ]
+      },
+      {
+        id: "BRM-6P-390MM",
+        category: "DECELERATION // BRAKING SYSTEM",
+        name: "BREMBO® 6-PISTON BRAKES",
+        desc: "Massive 390mm two-piece vented front rotors clamped by Brembo 6-piston aluminum monobloc fixed calipers with dedicated underbody cooling ducts and track-ready pads.",
+        metrics: [
+          { label: "FRONT ROTORS", val: "390 MM (15.3\")", note: "Two-piece Co-cast" },
+          { label: "CALIPER SPEC", val: "6-PISTON FIXED", note: "Monobloc Aluminum" },
+          { label: "BRAKING DIST", val: "93 FT (60-0)", note: "Zero Thermal Fade" },
+          { label: "DRIFT BRAKE", val: "ELECTRONIC", note: "Formula Drift Co-Engineered" }
+        ]
+      },
+      {
+        id: "EXH-ACT-4TIP",
+        category: "ACOUSTICS // PERFORMANCE EXHAUST",
+        name: "ACTIVE VALVE QUAD EXHAUST",
+        desc: "Quad-tipped active exhaust system featuring electronic butterfly valves that modulate acoustic backpressure across four selectable modes: Quiet, Normal, Sport, and Track.",
+        metrics: [
+          { label: "EXHAUST TIPS", val: "4.5\" QUAD CHROME", note: "Black PVD Coated" },
+          { label: "DRIVE MODES", val: "4 ACOUSTIC MODES", note: "Quiet to Full Track Decibel" },
+          { label: "FLOW RATE", val: "+18% CFM GAIN", note: "Low Backpressure" },
+          { label: "SOUND PROFILE", val: "DEEP V8 GROWL", note: "Harmonically Tuned" }
+        ]
+      },
+      {
+        id: "AER-DSN-PK",
+        category: "DYNAMICS // TRACK AERODYNAMICS",
+        name: "AERODYNAMIC DOWNFORCE PACK",
+        desc: "Engineered in the wind tunnel with a pronounced front chin splitter, aggressive functional hood heat extractors, underbody air strakes, and a rear wing with integrated Gurney flap.",
+        metrics: [
+          { label: "FRONT SPLITTER", val: "HIGH DOWNFORCE", note: "Vortex Generators" },
+          { label: "REAR SPOILER", val: "GURNEY FLAP", note: "High-speed Stability" },
+          { label: "HEAT EXTRACTOR", val: "VENTED HOOD", note: "Reduces Front-end Lift" },
+          { label: "UNDERBODY", val: "FLAT PANELING", note: "Diffuser Channeling" }
+        ]
+      },
+      {
+        id: "TRS-LSD-373",
+        category: "DRIVETRAIN // TRACTION",
+        name: "TORSEN® LIMITED-SLIP DIFF",
+        desc: "3.73 rear axle ratio paired with a helical-gear Torsen limited-slip differential and lightweight strut tower K-brace to deliver instantaneous power transfer to the outside wheel under cornering.",
+        metrics: [
+          { label: "AXLE RATIO", val: "3.73 : 1", note: "Acceleration Biased" },
+          { label: "DIFF TYPE", val: "HELICAL GEAR", note: "Torque-Sensing Torsen" },
+          { label: "BRACE SYSTEM", val: "K-BRACE ALLOY", note: "Strut Tower Stiffener" },
+          { label: "HALF-SHAFTS", val: "HEAVY DUTY", note: "Drag & Track Proven" }
+        ]
+      },
+      {
+        id: "CKP-UNR-3D",
+        category: "TELEMETRY // DIGITAL COCKPIT",
+        name: "IMMERSIVE DIGITAL COCKPIT",
+        desc: "Seamless magnesium-framed curved dual displays combining a 12.4\" instrument cluster with a 13.2\" center stack powered by Unreal Engine 3D for real-time telemetry rendering and customizable Fox Body gauge themes.",
+        metrics: [
+          { label: "DISPLAY SIZE", val: "13.2\" + 12.4\"", note: "Dual Curved Screen" },
+          { label: "GRAPHICS ENGINE", val: "UNREAL ENGINE 3D", note: "Real-time Vehicle Render" },
+          { label: "GAUGE MODES", val: "CUSTOM VINTAGE", note: "1980s Fox Body Heritage" },
+          { label: "TRACK APPS", val: "G-METER & LAP", note: "Launch Control Matrix" }
+        ]
+      }
+    ];
+
+    const compCategory = document.getElementById('compCategory');
+    const compName = document.getElementById('compName');
+    const compDesc = document.getElementById('compDesc');
+    const metric1Label = document.getElementById('metric1Label');
+    const metric1Val = document.getElementById('metric1Val');
+    const metric1Note = document.getElementById('metric1Note');
+    const metric2Label = document.getElementById('metric2Label');
+    const metric2Val = document.getElementById('metric2Val');
+    const metric2Note = document.getElementById('metric2Note');
+    const metric3Label = document.getElementById('metric3Label');
+    const metric3Val = document.getElementById('metric3Val');
+    const metric3Note = document.getElementById('metric3Note');
+    const metric4Label = document.getElementById('metric4Label');
+    const metric4Val = document.getElementById('metric4Val');
+    const metric4Note = document.getElementById('metric4Note');
+    const componentPills = document.querySelectorAll('.component-nav-pill');
+
+    function updateComponentDisplay(index) {
+      const data = MUSTANG_COMPONENTS[index];
+      if (!data) return;
+
+      const stage = document.getElementById('componentVisualLayer');
+      stage.style.opacity = '0.6';
+      stage.style.transform = 'scale(0.995)';
+      
+      setTimeout(() => {
+        compCategory.textContent = data.category;
+        compName.textContent = data.name;
+        compDesc.textContent = data.desc;
+
+        metric1Label.textContent = data.metrics[0].label;
+        metric1Val.textContent = data.metrics[0].val;
+        metric1Note.textContent = data.metrics[0].note;
+
+        metric2Label.textContent = data.metrics[1].label;
+        metric2Val.textContent = data.metrics[1].val;
+        metric2Note.textContent = data.metrics[1].note;
+
+        metric3Label.textContent = data.metrics[2].label;
+        metric3Val.textContent = data.metrics[2].val;
+        metric3Note.textContent = data.metrics[2].note;
+
+        metric4Label.textContent = data.metrics[3].label;
+        metric4Val.textContent = data.metrics[3].val;
+        metric4Note.textContent = data.metrics[3].note;
+
+        stage.style.opacity = '1';
+        stage.style.transform = 'scale(1)';
+      }, 120);
+
+      componentPills.forEach((p, idx) => {
+        if (idx === index) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+      
+      playUiSound('click');
+    }
+
+    componentPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const idx = parseInt(pill.getAttribute('data-index'), 10);
+        updateComponentDisplay(idx);
+      });
+    });
+
+    /* ═══════════════════════════════════════════════════════════════
+       3. CUSTOM TECHNICAL RETICLE CURSOR & MOUSE SPOTLIGHT
+       ═══════════════════════════════════════════════════════════════ */
+    const cursor = document.getElementById('customCursor');
+    const cursorText = document.getElementById('cursorText');
+    const mouseSpotlight = document.getElementById('mouseSpotlight');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+    let spotlightX = mouseX;
+    let spotlightY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    // Handle interactive hover targets for custom cursor
+    const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .component-nav-pill');
+    interactiveElements.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        if (cursor) {
+          cursor.classList.add('hovering');
+          if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+            cursorText.textContent = 'EXPLORE +';
+          } else {
+            cursorText.textContent = 'INSPECT';
+          }
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        if (cursor) {
+          cursor.classList.remove('hovering');
+        }
+      });
+    });
+
+    function renderCursorAndSpotlight() {
+      cursorX += (mouseX - cursorX) * 0.18;
+      cursorY += (mouseY - cursorY) * 0.18;
+      if (cursor) {
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
+      }
+
+      spotlightX += (mouseX - spotlightX) * 0.08;
+      spotlightY += (mouseY - spotlightY) * 0.08;
+      if (mouseSpotlight) {
+        mouseSpotlight.style.left = `${spotlightX}px`;
+        mouseSpotlight.style.top = `${spotlightY}px`;
+      }
+
+      requestAnimationFrame(renderCursorAndSpotlight);
+    }
+    renderCursorAndSpotlight();
+
+    /* ═══════════════════════════════════════════════════════════════
+       4. AMBIENT ATMOSPHERIC STUDIO DUST DRIFT
+       ═══════════════════════════════════════════════════════════════ */
+    const pCanvas = document.getElementById('particles-canvas');
+    const pCtx = pCanvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 36;
+
+    function resizeParticlesCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeParticlesCanvas);
+    resizeParticlesCanvas();
+
+    class StudioParticle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * pCanvas.width;
+        this.y = Math.random() * pCanvas.height;
+        this.size = Math.random() * 1.4 + 0.4;
+        this.speedX = (Math.random() - 0.5) * 0.15;
+        this.speedY = -Math.random() * 0.25 - 0.05;
+        this.opacity = Math.random() * 0.25 + 0.08;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.y < 0 || this.x < 0 || this.x > pCanvas.width) {
+          this.reset();
+          this.y = pCanvas.height;
+        }
+      }
+      draw() {
+        pCtx.fillStyle = `rgba(220, 230, 245, ${this.opacity})`;
+        pCtx.beginPath();
+        pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        pCtx.fill();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new StudioParticle());
+    }
+
+    function animateParticles() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* ═══════════════════════════════════════════════════════════════
+       5. ACTIVE NAVIGATION & SECTION TRACKING
+       ═══════════════════════════════════════════════════════════════ */
+    const nav = document.getElementById('mainNav');
+    const navLinks = document.querySelectorAll('.nav-item a');
+    const sections = document.querySelectorAll('.page');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+
+      let currentSectionId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 250;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinksContainer = document.getElementById('navLinks');
+    mobileToggle.addEventListener('click', () => {
+      navLinksContainer.classList.toggle('mobile-open');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksContainer.classList.remove('mobile-open');
+        playUiSound('click');
+      });
+    });
+
+    /* ═══════════════════════════════════════════════════════════════
+       6. WEB AUDIO API: SYNTHETIC LUXURY AUTOMOTIVE STUDIO ACOUSTICS
+       ═══════════════════════════════════════════════════════════════ */
+    let audioCtx = null;
+    let isPlayingSound = false;
+    let droneOsc1 = null;
+    let droneOsc2 = null;
+    let droneGain = null;
+    let droneFilter = null;
+
+    const soundToggle = document.getElementById('soundToggle');
+    const soundIconOff = document.getElementById('soundIconOff');
+    const soundIconOn = document.getElementById('soundIconOn');
+
+    function initAudioEngine() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+    }
+
+    function toggleStudioSound() {
+      initAudioEngine();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      if (isPlayingSound) {
+        if (droneGain) {
+          droneGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.4);
+          setTimeout(() => {
+            if (droneOsc1) { droneOsc1.stop(); droneOsc1.disconnect(); }
+            if (droneOsc2) { droneOsc2.stop(); droneOsc2.disconnect(); }
+            isPlayingSound = false;
+            soundToggle.classList.remove('playing');
+            soundIconOff.style.display = 'block';
+            soundIconOn.style.display = 'none';
+          }, 450);
+        }
+      } else {
+        droneOsc1 = audioCtx.createOscillator();
+        droneOsc2 = audioCtx.createOscillator();
+        droneFilter = audioCtx.createBiquadFilter();
+        droneGain = audioCtx.createGain();
+
+        droneOsc1.type = 'sine';
+        droneOsc1.frequency.setValueAtTime(46, audioCtx.currentTime);
+
+        droneOsc2.type = 'triangle';
+        droneOsc2.frequency.setValueAtTime(92, audioCtx.currentTime);
+
+        droneFilter.type = 'lowpass';
+        droneFilter.frequency.setValueAtTime(140, audioCtx.currentTime);
+
+        droneGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        droneGain.gain.setTargetAtTime(0.08, audioCtx.currentTime, 1.2);
+
+        droneOsc1.connect(droneFilter);
+        droneOsc2.connect(droneFilter);
+        droneFilter.connect(droneGain);
+        droneGain.connect(audioCtx.destination);
+
+        droneOsc1.start();
+        droneOsc2.start();
+
+        isPlayingSound = true;
+        soundToggle.classList.add('playing');
+        soundIconOff.style.display = 'none';
+        soundIconOn.style.display = 'block';
+      }
+    }
+
+    function playUiSound(type = 'click') {
+      if (!audioCtx || !isPlayingSound) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(type === 'click' ? 1200 : 600, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {
+        // Ignore audio errors
+      }
+    }
+
+    soundToggle.addEventListener('click', toggleStudioSound);
+
+    /* ═══════════════════════════════════════════════════════════════
+       7. REALTIME CONTACT FORM INQUIRY DISPATCH ENGINE
+       ═══════════════════════════════════════════════════════════════ */
+    async function handleInquirySubmit(e) {
+      e.preventDefault();
+      
+      const projectTypeEl = document.getElementById('projectType');
+      const clientEmailEl = document.getElementById('clientEmail');
+      const projectVisionEl = document.getElementById('projectVision');
+      const honeypotEl = document.getElementById('website_url_hp');
+      const statusBox = document.getElementById('commissionStatusMessage');
+      const submitBtn = document.getElementById('startProjectBtn');
+      const btnText = document.getElementById('btnText');
+      const btnArrow = document.getElementById('btnArrow');
+
+      const websiteType = projectTypeEl ? projectTypeEl.value : '';
+      const email = clientEmailEl ? clientEmailEl.value.trim() : '';
+      const description = projectVisionEl ? projectVisionEl.value.trim() : '';
+      const website_url_hp = honeypotEl ? honeypotEl.value : '';
+
+      function showStatus(html, type) {
+        if (!statusBox) return;
+        statusBox.className = `commission-status-box ${type}`;
+        statusBox.innerHTML = html;
+        statusBox.style.display = 'block';
+      }
+
+      function resetButton() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnText) btnText.textContent = 'RETRY TRANSMISSION';
+        if (btnArrow) btnArrow.textContent = '↺';
+      }
+
+      // Basic client-side guard
+      if (!websiteType) {
+        showStatus('Please select a project experience scope.', 'error');
+        if (projectTypeEl) projectTypeEl.focus();
+        return;
+      }
+      if (!email || !email.includes('@')) {
+        showStatus('Please enter a valid email address.', 'error');
+        if (clientEmailEl) clientEmailEl.focus();
+        return;
+      }
+      if (!description || description.length < 5) {
+        showStatus('Please enter a short description of your project vision (minimum 5 characters).', 'error');
+        if (projectVisionEl) projectVisionEl.focus();
+        return;
+      }
+
+      // UI: Set loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnText) btnText.textContent = 'TRANSMITTING SPECIFICATION...';
+      if (btnArrow) btnArrow.innerHTML = '<span class="status-spinner" style="display:inline-block; width:12px; height:12px; border-width:2px;"></span>';
+
+      showStatus('<div class="status-spinner"></div> Transmitting project specification to S.V.Praveen Kumar...', 'loading');
+
+      try {
+        const response = await fetch('/api/commission', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            websiteType,
+            email,
+            description,
+            website_url_hp
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && data.success) {
+          showStatus(`✓ <strong>COMMISSION RECEIVED:</strong> ${data.message || 'Your project request has been transmitted successfully.'}`, 'success');
+          
+          if (submitBtn) {
+            submitBtn.style.background = '#10b981';
+            submitBtn.style.borderColor = '#10b981';
+            submitBtn.style.color = '#ffffff';
+          }
+          if (btnText) btnText.textContent = 'SPECIFICATION TRANSMITTED ✓';
+          if (btnArrow) btnArrow.textContent = '✓';
+
+          // Reset form fields
+          const form = document.getElementById('projectInquiryForm');
+          if (form) form.reset();
+          playUiSound('click');
+
+          setTimeout(() => {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.style.background = '';
+              submitBtn.style.borderColor = '';
+              submitBtn.style.color = '';
+            }
+            if (btnText) btnText.textContent = 'COMMISSION A BESPOKE EXPERIENCE';
+            if (btnArrow) btnArrow.textContent = '→';
+          }, 6000);
+
+        } else {
+          const errMsg = data.message || 'Transmission failed. Please verify your details and retry.';
+          showStatus(`⚠ <strong>TRANSMISSION ERROR:</strong> ${errMsg}`, 'error');
+          resetButton();
+        }
+      } catch (err) {
+        console.error('Commission dispatch error:', err);
+        showStatus('⚠ <strong>NETWORK ERROR:</strong> Unable to connect to server. Please ensure local server is running or email <a href="mailto:praveenkumar251656@gmail.com" style="color:#38bdf8; text-decoration:underline;">praveenkumar251656@gmail.com</a> directly.', 'error');
+        resetButton();
+      }
+    }
+  </script>
+</body>
+</html>
